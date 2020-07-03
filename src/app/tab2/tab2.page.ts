@@ -1,12 +1,23 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { EpisodesService } from "../services/episodes.service";
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: "app-tab2",
+  templateUrl: "tab2.page.html",
+  styleUrls: ["tab2.page.scss"],
 })
 export class Tab2Page {
+  Episodes: any = [];
+  constructor(private EpiService: EpisodesService) {}
 
-  constructor() {}
+  ngOnInit(): void {
+    this.getEpisodes();
+  }
 
+  getEpisodes() {
+    this.EpiService.getEpisodes().subscribe((epi) => {
+      console.log(epi);
+      this.Episodes = epi;
+    });
+  }
 }
